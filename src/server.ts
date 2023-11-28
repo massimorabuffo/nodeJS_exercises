@@ -2,6 +2,7 @@ import { log } from "console";
 import express from "express";
 import "express-async-errors"
 import morgan from "morgan"
+import {getAll, getOneById, create, updateById, deleteById} from "./controllers/planets.js"
 
 const TODO: string = "start writing your Express API server here :)";
 
@@ -12,58 +13,16 @@ const port = 3000
 
 app.use(morgan("dev"));
 
-app.get('/api/planets', (req, res) => {
-  res.status(200).json(planets);
-})
+app.get('/api/planets', getAll)
 
-app.get('/api/planets/:id', (req, res) => {
-  const {id} = req.params;
-  const planet = planets.find(el => el.id === Number(id));
-  res.status(200).json(planet);
-})
+app.get('/api/planets/:id', getOneById)
 
-app.post('/api/planets', (req, res) => {
-  const {id, name} = req.body;
-  const newPlanet = {id, name};
-  planets = [...planets, newPlanet];
+app.post('/api/planets', create)
 
-  res.status(201).json({msg: 'A new planet was created.'}).end();
-})
+app.put('/api/planets/:id', updateById)
 
-app.put('/api/planets/:id', (req, res) => {
-  const {id} = req.params;
-  const {name} = req.body;
-  planets = planets.map(el => el.id === Number(id) ? {...el, name} : el);
-
-  res.status(200).json({msg: `Planet: '${name}' was updated.`});
-})
-
-app.delete('/api/planets/:id', (req, res) => {
-  const {id} = req.params;
-  const {name} = req.body;
-  planets.filter(el => el.id !== Number(id));
-
-  res.status(200).json({msg: `Planet: '${name}' was deleted.`});
-})
+app.delete('/api/planets/:id', deleteById)
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })
-
-type Planet = {
-    id: number,
-    name: string,
-  };
-
-  type Planets = Planet[];
-
-  let planets: Planets = [
-    {
-      id: 1,
-      name: "Earth",
-    },
-    {
-      id: 2,
-      name: "Mars",
-    },
-  ];
