@@ -36,7 +36,7 @@ app.put('/api/planets/:id', updateById)
 
 app.delete('/api/planets/:id', deleteById)
 
-app.post('/api/planets/:id/image', upload.single("image"), createImage)
+// app.post('/api/planets/:id/image', upload.single("image"), createImage)
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
