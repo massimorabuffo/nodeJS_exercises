@@ -14,6 +14,9 @@ dependencies:
   express-async-errors:
     specifier: ^3.1.1
     version: 3.1.1(express@4.18.2)
+  jsonwebtoken:
+    specifier: ^9.0.2
+    version: 9.0.2
   morgan:
     specifier: ^1.10.0
     version: 1.10.0
