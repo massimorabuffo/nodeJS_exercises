@@ -40,7 +40,7 @@ const createImage = async (req: Request, res: Response) => {
     const {id} = req.params;
     const filename = req.file?.path;
 
-    if(filename){
+    if(filename && id){
         db.none(`UPDATE planets SET image$2 WHERE id=$1`, [Number(id), filename]);
         res.status(201).json({msg: `Planet image uploded successfully.`})
     }else{
